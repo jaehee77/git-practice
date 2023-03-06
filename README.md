@@ -304,7 +304,7 @@ git merge feature/b
 git merge --no-ff feature/b
 ```
 
-## 필요한 커밋만 뽑아내기 Cherry pick
+## 필요한 커밋만 뽑아내기 ::: Cherry pick
 ```bash
 
 ```
