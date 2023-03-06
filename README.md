@@ -391,5 +391,6 @@ git stash drop stash@{3}
 git stash clear
 
 # stash 에 잠시 저장해 놓은 것을 새로운 브랜치를 생성하면서 stash 에 있는 것도 적용하기
+# stash 목록에 하나만 있을 경우에 가능한 듯
 git stash branch 브랜치명
 ```
