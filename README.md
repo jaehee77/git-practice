@@ -303,8 +303,6 @@ git merge feature/b
 # 변경이력남겨서 머지하기 (fast-forward-merged 하지 않고)
 git merge --no-ff feature/b
 
-```
-
 # 머지할 때 충돌이 난다면 충돌해결 후에 git add . 를 하고 계속진행하라는 플래그를 작성
 git add .
 git merge --continue
@@ -333,5 +331,23 @@ fast-forward 가 가능해지게 된다.
 즉, 서버에 업로드되지 않은 나의 로컬에 커밋에 한해서 rebase 를 하는 것은 편하게 할 수 있다.
 ```bash
 # 머지할 곳의 브랜치의 최신 커밋 버전 포인터로 작업 브랜치를 rebase 한다.
+git rebase master # feature/a 작업 브랜치를 머지할 곳의 마스터브랜치로 rebase 한다.
 
+# rebase --onto
+# 마스터에서 파생된 feature/a 브랜치에서 또 파생된 브랜치인 feature/a-ui 가 있을 경우
+# feature/a-ui 를 마스터 브랜치로 머지하려고 하는 경우에 rebase --onto 를 사용할 수 있다.
+git rebase --onto master feature/a feature/a-ui
+# 역시, 서버에 올라가 있다면 주의해서 사용해야 한다.
 ```
+
+<br />
+
+## 원하는(특정한) 커밋 버전만 쏙 뽑아내기 cherry pick
+```bash
+# 뽑아올 대상 커밋 버전의 해쉬코드를 가져와서 머지될 대상 브랜치로 이동(여기선 마스터라고 가정)
+git cherry-pick f2b9178 # 마스터 브랜치로 다른 브랜치의 커밋버전을 쏙 뽑아와서 머지함
+```
+
+<br />
+
+## Stach 알아보기
