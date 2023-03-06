@@ -264,4 +264,38 @@ git branch --no-merged
 # 머지(병합)하기
 # 머지될 타켓 브랜치로 이동한 후 머지할 대상 브랜치를 작성
 git merge feature/a # 이동한 타켓 브랜치가 master 라면 마스터브랜치에 feature/a 를 병합하는 것임
+
+# 로컬 브랜치 삭제하기
+git branch -d 브랜치명
+
+# 원격저장소에 있는 브랜치도 삭제하기
+git push origin --delete 브랜치명
+git push origin -d 브랜치명
+
+# 로컬 브랜치 이름 변경하기
+git branch --move 대상브랜치명 변경할이름브랜치명
+
+# 이름이 변경된 브랜치도 원격저장소에 업데이트하기
+git push --set-upstream origin 변경된이름브랜치명
+
+# 리모트 저장소 살펴보기
+git remote show origin
+git remote show upstream
+
+# 브랜치와 브랜치사이의 커밋 정보들만 보기
+git log master..feature/a
+
+# remote 혹은 upstream branch 가져와 새로운 local branch 생성하고 checkout하기
+git checkout -b [new_local_branch_name] [remote_or_upstream branch_(ex: upstream/branch_name)]
+```
+
+
+## Git 머지하기
+예를 들어 master 브랜치에서 브랜치를 생성해서 작업한 후 작업한 브랜치를 마스터 브랜치로  
+머지하려고 할 때 머지하는 시점에 마스터 브랜치에 더이상의 커밋이력이 없고 작업브랜치를 머지하려고 하면   fast-forward-merged 를 하게 되어 머지커밋 이력이 남지 않고 머지하게 된다.
+하지만 fast-forward-merged 를 하고 싶지 않다면 --no--ff(no-fast-forward) 를 하면  
+머지 커밋이력을 남기고 머지할 수 있다.
+```bash
+# 변경이력남겨서 머지하기 (fast-forward-merged 하지 않고)
+git merge --no--ff feature/b
 ```
