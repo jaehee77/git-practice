@@ -290,7 +290,7 @@ git checkout -b [new_local_branch_name] [remote_or_upstream branch_(ex: upstream
 ```
 
 
-## Git 머지하기
+## Git 머지와 충돌해결 하기
 예를 들어, master 브랜치에서 브랜치를 생성해서 작업한 후 작업한 브랜치를 마스터 브랜치로  
 머지하려고 할 때 머지하는 시점에 마스터 브랜치에 더이상의 커밋이력이 없고 작업브랜치를 머지하려고 하면   fast-forward-merged 를 하게 되어 머지커밋 이력이 남지 않고 머지하게 된다.
 하지만 fast-forward-merged 를 하고 싶지 않다면 --no--ff(no-fast-forward) 를 하면  
