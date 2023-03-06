@@ -302,7 +302,41 @@ git merge feature/b
 
 # 변경이력남겨서 머지하기 (fast-forward-merged 하지 않고)
 git merge --no-ff feature/b
+
 ```
+
+# 머지할 때 충돌이 난다면 충돌해결 후에 git add . 를 하고 계속진행하라는 플래그를 작성
+git add .
+git merge --continue
+
+# 머지 취소하기
+git merge --abort
+
+# 머지툴을 사용하는 경우 .orig 라는 백업파일이 생긴다면 백업파일을 생성하지 않도록 하기
+git config --global merge.tool.keepBackup false
+
+# 깃 청소하기
+git clean -fd #(force 하게 directory 에 있는 것들을 clean)
+```
+
+<br />
+
+## Rebase 란 무엇일까? 
+리베이스를 이용하면 머지 충돌이 일어났을 때 three-way merge 를 하여  
+머지 커밋이력을 남기지 않고 fast-forward merge 와 같은 방법을 사용할 수 있다.  
+작업한 브랜치를 머지될 대상 브랜치의 최신 커밋 버전쪽으로 rebase 를 한다면  
+fast-forward 가 가능해지게 된다.  
+하지만 작업하는 브랜치가 다른 사람과 협업, 같이 작업하고 있다면 기존에 있던   
+커밋 이력들이 달라지게 되기 때문에 주의해야 한다.  
+특히나 원격 저장소에 작업중인 브랜치의 커밋 이력이 올라가 있다면(업로드)   
+업로드된 히스토리는 건들면 안된다. 충돌이 발생하게 된다.  
+즉, 서버에 업로드되지 않은 나의 로컬에 커밋에 한해서 rebase 를 하는 것은 편하게 할 수 있다.
+```bash
+# 머지할 곳의 브랜치의 최신 커밋 버전 포인터로 작업 브랜치를 rebase 한다.
+
+
+```
+
 
 ## 필요한 커밋만 뽑아내기 ::: Cherry pick
 ```bash
