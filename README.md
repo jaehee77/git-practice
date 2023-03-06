@@ -303,3 +303,8 @@ git merge feature/b
 # 변경이력남겨서 머지하기 (fast-forward-merged 하지 않고)
 git merge --no-ff feature/b
 ```
+
+## 필요한 커밋만 뽑아내기 Cherry pick
+```bash
+
+```
