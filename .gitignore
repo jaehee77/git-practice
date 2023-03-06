@@ -1,0 +1,39 @@
+# 확장자가 .log 로 끝나는 모든 파일
+*.log
+
+# 특정한 디렉토리안에 있는 파일들 모두 추가하지 않기
+build/
+
+# 특정한 디렉토리안에 있는 .확장자로 끝나는 모든 파일 추적하지 않기
+build/*.log
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
+
+# Optional npm cache directory
+.npm
+
+# nuxt.js build output
+.nuxt
+.nuxt-markup
+
+# Nuxt generate
+dist
+
+
+# IDE / Editor
+.idea
+.history
+
+
+# macOS
+.DS_Store
+
+
+# Vim swap files
+*.swp
+
