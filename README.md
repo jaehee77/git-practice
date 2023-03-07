@@ -394,3 +394,132 @@ git stash clear
 # stash 목록에 하나만 있을 경우에 가능한 듯
 git stash branch 브랜치명
 ```
+
+<br />
+
+# Git 취소하기, 수정하기, 리셋하기, 커밋 버전 삭제하기 등...
+## 로컬에서 작업하는 파일이나 working directory 에서 작업하는 내용을 초기화하는 방법
+> reset 은 내가 가고자하는 포인터를 가리킬 수 있다.
+```bash
+# working directory 안에 있는 파일 지워버리기
+git restore 파일명
+# working directory 안에 있는 파일 모두 버리기(삭제하기)
+git resotre .
+
+# staging area 에 파일이 있을 때 취소해서 working directory 로 가져가기
+git restore --staged 파일명 # or .(dot)
+
+
+# reset 은 내가 가고자하는 포인터를 가리킬 수 있다.
+# staging 에 있는 모든 파일들이 다시 working directory 로 되돌려 놓을 수 있다.
+git rest HEAD .
+
+# 어떤 커밋으로부터 파일을 초기화할 것인지를 작성할 수 있다.
+git restore --source=HEAD~2 파일명
+```
+
+## 커밋 메시지 및 파일내용을 업데이트하여 수정하기
+> 로컬에서만 사용하길 권장(서버에 변경사항을 푸쉬하지 않았을 경우에 사용)
+```bash
+# 커밋 메시지 또는 커밋 메시지와 파일내용을 수정했을 경우
+git commit --amend -m "modified message"
+
+# 커밋한 파일의 내용만 수정했을 경우
+git commit --amend
+```
+
+## 리셋 그리고 리셋
+> 특정한 커밋 버전으로 모든 것을 초기화 시켜주는 명령어
+```bash
+git reset HEAD~2
+# git reset --mixed  와 동일하다고 할 수 있다.
+# 되돌리면 작업하여 커밋했던 내용들은 working directory 에 옮겨 놓게 된다.
+
+git restore . 
+# restore 를 한다고 해서 새로 추가된 파일이 삭제되지 않기 때문에
+# 삭제를 해야 한다면 clean -fd 해주어야 한다.
+git clean -fd
+
+# HEAD 를 쓰지 않고 커밋아이디를 이용하기
+git reset 3868bd
+
+# --mixed 는 working directory 로 옮겨 놓지만
+# --soft 는 staging area 로 옮겨 놓는다.
+git reset --soft HEAD~1
+
+# 그냥 다 working directory, staging area 도 남기지 말고 다 삭제하기
+git reset --hard HEAD~2
+```
+
+## 실수로 모든 커밋을 날려서 reset 을 했다면.. 다시 복구하기
+```bash
+# 참조된 로그를 통해 hash code 를 확인하고 해당 해쉬코드를 이용하여 해당 커밋버전으로 돌아간다.
+git reflog
+
+git reset --hard 6f8c067
+# 단, 커밋이 되어 있지 않은 경우에는 되돌릴 수 없다.
+```
+
+## 취소사항을 버전으로 남기기
+리셋등을 이용하여 이전 버전으로 되돌리는 작업등의 취소하기를 하면  
+취소한 내용이 커밋버전으로 남지가 않는다.  
+하지만 이전 커밋으로 되돌리기 취소를 revert 를 이용한다면 취소하려는 커밋 내용들을 제거하면서  
+커밋 내역까지 남기면서 버전 관리를 할 수 있다.
+```bash
+# 커밋 내용을 남기면서 해당 해쉬코드 커밋내용을 삭제
+git revert fa7bbd6
+
+# 커밋 내용을 남기지 않고 커밋 버전 삭제
+# 이 경우에는 revert 하여 제거하려 했던 내용들은 staging area 에 옮겨놓게 된다.
+git revert --no-commit 1d11be8
+```
+
+
+## 이전것들 중에서 커밋 메시지를 수정하기(혼자 작업한다면 강추)
+> 이전것을 수정하면 수정하려는 커밋버전보다 나중(최신)의 커밋사항들도 업데이트된다는 점 유의!
+```bash
+# interactive
+git rebase -i 9855fc
+```
+
+
+<br />
+
+## Git Repository
+```bash
+# 원격 저장소가 있다면 어떤 저장소가 있는지 확인
+git remote
+
+# 원격 저장소에 대한 연결된 정보
+git remote -v
+
+# 다수의 리모트 저장소를 추가하기(여기서 업스트림은 저장소의 별칭을 의미)
+git remote add upstream 깃허브링크(주소)
+
+
+# 원격 저장소의 상세 정보보기
+git remote show origin
+
+
+git push
+# 아이디와 패스워드 입력후 푸쉬 완료됨
+
+# 원격 저장소의 커밋 버전이 더 앞서고 있고
+# 로컬 저장소에도 변경 내역이 있다면 
+# 즉, 원격과 로컬의 싱크가 맞지 않다면
+# 로컬 저장소에 있는 것을 force 로 푸쉬하게 되면
+# 원격 저장소에 변동 사항이 있더라도 내 로컬 내역을 강제로 푸쉬하면
+# 원격 저장소에 있던 커밋 내역은 삭제되고 내 로컬 저장소에 있는 것이 올라가게 된다.
+git push -f
+```
+
+## 이미 로컬에 만들어진 프로젝트를 원격저장소에 추가하기
+원격저장소에 저장소 생성후에 푸쉬
+```bash
+
+```
+
+
+## 푸쉬를 간편하게 하기 SSH(Secure Share protocal)
+서버에는 퍼블릭키를 개인 로컬에는 프라이빗키를 저장해 놓음으로써 푸쉬를 할때  
+아이디와 비번을 입력하지 않게 사용할 수 있다.
