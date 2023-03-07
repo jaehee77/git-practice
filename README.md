@@ -1,6 +1,6 @@
 <br />
 
-## Git Config(설정파일)
+### Git Config(설정파일)
 ```bash
 # 설정파일 목록 보기
 git config --list
@@ -41,7 +41,7 @@ git config --global core.autocrlf true
 
 <br />
 
-## Git 초기화, 삭제하기 및 깃 별칭 설정하기
+### Git 초기화, 삭제하기 및 깃 별칭 설정하기
 ```bash
 # 깃 초기화
 git init
@@ -64,7 +64,7 @@ git config --global alias.st status
 <br />
 
 
-## Git add (staging area 로 올리기), status
+### Git add (staging area 로 올리기), status
 ```bash
 # staging area 에 추가하기(깃 버전을 생성할 준비가 된 단계)
 git add .
@@ -88,7 +88,7 @@ git status -s
 
 <br />
 
-## 파일 비교하기 diff
+### 파일 비교하기 diff
 ```bash
 git diff
 git diff --staged
@@ -646,9 +646,10 @@ Upstream Repository의 master branch로 pull request한다.
 
 
 <br />
+
 ### Master 브랜치 내용을 작업 브랜치로 업데이트
-만약 개발기간이 길어져서 Upstream 내용이 local의 작업 branch에 필요하다면 내용을 풀 받아서 진행해야 한다.  
-먼저 로컬 작업브랜치에서 Upstream Repository의 branch를 pull (git pull upstream 내작업브랜치)하고,  
+만약 개발기간이 길어져서 Upstream 내용이 로컬 작업 브랜치에 필요하다면  내용을 풀 받아서 진행해야 한다.  
+먼저 로컬 작업브랜치에서 업스트림 브랜치를 pull (git pull upstream 내작업브랜치)하고,    
 로컬 작업 브랜치에서 내 원격저장소의 브랜치로 push (git push origin 내작업브랜치)한다.
 ```bash
 $ git pull upstream master
