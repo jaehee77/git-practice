@@ -28,3 +28,9 @@ logs/*.c
 
 # logs 폴더 바로 안, 또는 그 안의 다른 폴더(들) 안의 debug.log
 logs/**/debug.log
+
+# 업스트림 브랜치로부터 내 로컬에 새로운 브랜치 생성하기
+# git checkout -b feature/jaehee upstream/release/1.22
+
+# 로컬에 새로운 브랜치 생성했다면 나의 origin(원격저장소)로 생성한 브랜치 푸쉬하기
+# git push origin feature/jaehee
